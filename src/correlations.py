@@ -4,8 +4,6 @@ import numpy as np
 # Function: compute tip percentage
 # this function creates the tip percentage based on correlations observed in real-world data
 # -----------------------------------------
-import numpy as np
-
 def compute_tip_percent(df):
     """
     Compute tip percentage using more realistic, research-informed heuristics.
@@ -23,16 +21,16 @@ def compute_tip_percent(df):
     tip = np.full(n, 15.0, dtype=float)   # baseline around standard delivery tip
 
 
-    # Small orders often hit a "minimum tip" in dollars, so percent goes up.
+    # small   orders often hit a "minimum tip" in dollars, so percent goes up.
     small_order = df["order_subtotal"] < 15
     tip[small_order] += 4.0   # push small orders toward ~19%
 
-    # Very large orders often get slightly higher % as well, but not huge.
+    # vcry large orders often get slightly higher % as well, but not huge.
     large_order = df["order_subtotal"] > 40
     tip[large_order] += 2.0   # modest bump for big orders
 
  
-    # Bad weather → people are *supposed* to tip more (guides + anecdotes).
+    # bad weather means that people are *supposed* to tip more.
     tip += (df["weather"] == "rain") * 2.0
     tip += (df["weather"] == "snow") * 3.0
 
@@ -42,18 +40,18 @@ def compute_tip_percent(df):
     extra_dist = np.clip(df["distance_miles"] - 4.0, 0, None) # only count miles beyond 4 
     tip += extra_dist * 0.6   # every extra mile adds ~0.6 percentage points
 
-    # Penalize *extra* wait beyond an expected 12 minutes.
+    # penalize *extra* wait beyond an expected 12 minutes.
     extra_wait = np.clip(df["wait_time_minutes"] - 12.0, 0, None) # only count minutes beyond 12
     tip -= extra_wait * 0.3   # each extra minute beyond 12 cuts tip modestly
 
 
-    # Late-night / dinner-type orders: slightly more generous.
+    # late night / dinner-type orders: slightly more generous.
     tip += (df["time_of_day"] == "night") * 1.0
     # Early-morning small orders (coffee, etc.) might be a bit less generous.
     tip -= (df["time_of_day"] == "morning") * 0.5
 
 
-    # Weekends (Fri–Sun) → slightly higher mood & spend.
+    # weekends (Fri–Sun) cause slightly higher mood & spend.
     weekend = df["day_of_week"].isin(["Fri", "Sat", "Sun"])
     tip += weekend * 0.8
 

@@ -1,8 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+# EDA to confrim there is a pattern between the features and the target variable 'tip_percent'
 
-# Load dataset
 df = pd.read_csv("../data/synthetic/synthetic_delivery_data.csv")
 
 print(df.head())
@@ -10,14 +10,14 @@ print(df.info())
 print(df.describe())
 print(df['tip_percent'].describe())
 
-# Tip percent distribution
+# tip percent distribution
 df['tip_percent'].hist(bins=30)
 plt.title("Tip Percent Distribution")
 plt.xlabel("Tip Percent")
 plt.ylabel("Frequency")
 plt.show()
 
-# Scatter plots for numeric features
+# scatter plots for numeric features
 numeric_features = [
     "distance_miles",
     "wait_time_minutes",
@@ -33,7 +33,7 @@ for col in numeric_features:
     plt.ylabel("tip_percent")
     plt.show()
 
-# Boxplots for categorical features
+# boxplots for categorical features
 categorical_features = ["weather", "time_of_day", "day_of_week"]
 
 for col in categorical_features:
