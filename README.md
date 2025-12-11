@@ -1,4 +1,4 @@
-# 🚚 Delivery Tip Prediction Model
+# Delivery Tip Prediction Model
 
 This project builds a machine learning model that predicts **tip percentage** and **tip amount** for food delivery orders based on real-world features such as distance, subtotal, weather, time of day, wait time, and customer behavior.
 
@@ -11,7 +11,7 @@ The project includes:
 
 ---
 
-## 📊 Project Overview
+## Project Overview
 
 Tipping behavior is inconsistent and depends on multiple factors.  
 This project uses regression modeling to estimate how much a customer will tip based on:
@@ -30,7 +30,7 @@ Categorical variables are one-hot encoded, and numerical variables are standardi
 
 ---
 
-## 🧠 Model Performance
+## Model Performance
 
 We trained multiple models and evaluated each using 5-fold cross-validation.
 
@@ -44,14 +44,14 @@ We trained multiple models and evaluated each using 5-fold cross-validation.
 | KNN Regressor | 2.985 | — |
 | **XGBoost (Tuned)** | **2.471** | **2.356** |
 
-### ✅ Final chosen model: **Tuned XGBoost**  
-### 📉 Final error: **MAE ≈ 2.35 percentage points**
+### Final chosen model: **Tuned XGBoost**  
+### Final error: **MAE ≈ 2.35 percentage points**
 
 This means the model is typically within ~2.35% of the true tip percentage — very strong performance for predicting human tipping behavior.
 
 ---
 
-## 🔍 Explainability with SHAP
+## Explainability with SHAP
 
 SHAP values reveal how each input feature influences predictions.
 
@@ -71,7 +71,7 @@ All stored in `/models/`.
 
 ---
 
-## 🛠 Training the Model
+## Training the Model
 
 To retrain the entire pipeline:
 
